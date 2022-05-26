@@ -34,13 +34,12 @@ function saveData(e) {
     e.preventDefault();
     let weightKg = document.querySelector('.weight-value');
     let heightCm = document.querySelector('.height-value');
-    if (!weightKg.value || !heightCm.value) {
+    if (weightKg.value == '' || heightCm.value == '') {
         changeBtn.setAttribute('class', 'button change-btn hide');
         resultBtn.setAttribute('class', 'button result-btn');
         alert('請輸入身高及體重');
         return;
     };
-
     const weightValue = weightKg.value;
     const heightValue = heightCm.value / "100";
     console.log(heightValue);
@@ -64,8 +63,8 @@ function saveData(e) {
     localStorage.setItem('listData', JSON.stringify(data));
     updateList(data);
     //switchBtn(e);
-    weightKg.value = ''; //清空欄位
-    heightCm.value = ''; //清空欄位
+    // weightKg.value = ''; //清空欄位
+    // heightCm.value = ''; //清空欄位
 }
 
 //bmi狀態判斷
@@ -162,7 +161,7 @@ function deleteAllData(e) {
 function switchBtn(e) {
     let weightKg = document.querySelector('.weight-value');
     let heightCm = document.querySelector('.height-value');
-    if (!weightKg.value || !heightCm.value) {
+    if (weightKg.value == '' || heightCm.value == '') {
         changeBtn.setAttribute('class', 'button change-btn hide');
         resultBtn.setAttribute('class', 'button result-btn');
         return;
@@ -175,6 +174,8 @@ function switchBtn(e) {
         resultBtn.classList.remove('hide');
         changeBtn.classList.add('hide')
         statusTag.classList.add('hide');
+        weightKg.value = ''; //清空欄位
+        heightCm.value = '';
     }
 }
 
