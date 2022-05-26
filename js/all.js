@@ -130,7 +130,7 @@ function updateList(items) {
             <span>${items[i].status}</span>
             <span>身高 ${items[i].height}cm</span>
             <span>體重 ${items[i].weight}Kg</span>
-            <span>bmi值 ${items[i].bmi}</span>
+            <span>BMI值 ${items[i].bmi}</span>
             <span class="delete-btn" data-index="${i}">刪除</span>
         </li>`
 
