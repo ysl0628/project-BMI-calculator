@@ -4,8 +4,8 @@ let changeBtn = document.querySelector('.change-btn');
 let btnBox = document.querySelector('.btn-box');
 let statusTag = document.querySelector('.status')
 let resultList = document.querySelector('.result-list');
+let activitySelect = document.querySelector('.activity-select');
 let deleteAllBtn = document.querySelector('.delete-all');
-// let deleteBtn = document.querySelector('.delete-btn');
 let data = JSON.parse(localStorage.getItem('listData')) || [];
 
 //監聽及更新
@@ -13,17 +13,19 @@ resultBtn.addEventListener('click', saveData, false);
 btnBox.addEventListener('click', switchBtn, false);
 deleteAllBtn.addEventListener('click', deleteAllData, false);
 resultList.addEventListener('click', deleteData, false);
+activitySelect.addEventListener('change', calorieCal, false);
 updateList(data);
 
 //
 function init() {
-    let records = JSON.parse(localStorage.getItem("listData")) || []
-    for (let i = 0; i < records.length; i++) {
+    let data = JSON.parse(localStorage.getItem("listData")) || []
+    for (let i = 0; i < data.length; i++) {
         showResult(
-            records[i].status,
-            records[i].weight,
-            records[i].height,
-            records[i].bmi,
+            data[i].status,
+            data[i].weight,
+            data[i].height,
+            data[i].bmi,
+            data[i].calories,
             i
         )
     }
@@ -40,25 +42,29 @@ function saveData(e) {
         alert('請輸入身高及體重');
         return;
     };
+    let activitySelect = document.querySelector('.activity-select');
     const weightValue = weightKg.value;
     const heightValue = heightCm.value / "100";
+    const activity = activitySelect.value
     console.log(heightValue);
     const bmi = weightValue / (heightValue * heightValue);
     const bmiValue = bmi.toFixed(2);
     console.log(bmiValue);
-
     let resultData = {
         status: '',
         statusColor: '',
         weight: weightValue,
         height: heightCm.value,
         bmi: bmiValue,
+        calories: '',
+        activity: activity,
     }
     console.log(resultData);
     resultData.status = bmiStatus(resultData.bmi);
     resultData.statusColor = statusColor(resultData.status);
     changeBtn.textContent = 'BMI ' + resultData.bmi;
     statusTag.textContent = resultData.status;
+    resultData.calories = calorieCal(resultData.status, resultData.activity);
     data.push(resultData);
     localStorage.setItem('listData', JSON.stringify(data));
     updateList(data);
@@ -124,13 +130,13 @@ function statusColor(status) {
 //更新resultList
 function updateList(items) {
     let str = '';
-    let bmi = '';
     for (let i = 0; i < items.length; i++) {
         str += `<li class="${items[i].statusColor}">
             <span>${items[i].status}</span>
             <span>身高 ${items[i].height}cm</span>
             <span>體重 ${items[i].weight}Kg</span>
             <span>BMI值 ${items[i].bmi}</span>
+            <span>建議熱量 ${items[i].calories} 大卡</span>
             <span class="delete-btn" data-index="${i}">刪除</span>
         </li>`
 
@@ -176,6 +182,43 @@ function switchBtn(e) {
         statusTag.classList.add('hide');
         weightKg.value = ''; //清空欄位
         heightCm.value = '';
+    }
+}
+
+//熱量判斷及計算
+function calorieCal(status, activityLevel) {
+    let weightKg = document.querySelector('.weight-value').value;
+    if (status == '過輕') {
+        if (activityLevel == '輕度工作') {
+            return 35 * weightKg
+        }
+        if (activityLevel == '中度工作') {
+            return 40 * weightKg
+        }
+        if (activityLevel == '重度工作') {
+            return 45 * weightKg
+        }
+    }
+    if (status == '正常') {
+        if (activityLevel == '輕度工作') {
+            return 30 * weightKg
+        }
+        if (activityLevel == '中度工作') {
+            return 35 * weightKg
+        }
+        if (activityLevel == '重度工作') {
+            return 40 * weightKg
+        }
+    } else {
+        if (activityLevel == '輕度工作') {
+            return 25 * weightKg
+        }
+        if (activityLevel == '中度工作') {
+            return 30 * weightKg
+        }
+        if (activityLevel == '重度工作') {
+            return 35 * weightKg
+        }
     }
 }
 
