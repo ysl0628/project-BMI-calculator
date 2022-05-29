@@ -1,3 +1,31 @@
+// calories 係數表
+const caloriesList = {
+    Status_UnderWeight_Level_1: 35,
+    Status_UnderWeight_Level_2: 40,
+    Status_UnderWeight_Level_3: 45,
+    Status_Normal_Level_1: 30,
+    Status_Normal_Level_2: 35,
+    Status_Normal_Level_3: 40,
+    Status_OverWeight_Level_1: 25,
+    Status_OverWeight_Level_2: 30,
+    Status_OverWeight_Level_3: 35,
+}
+
+const statusToListKey = {
+    "過輕": "UnderWeight",
+    "正常": "Normal",
+    "過重": "OverWeight",
+    "輕度肥胖": "OverWeight",
+    "中度肥胖": "OverWeight",
+    "重度肥胖": "OverWeight"
+}
+
+const optionToListKey = {
+    "輕度工作": 1,
+    "中度工作": 2,
+    "重度工作": 3
+}
+
 //宣告
 let resultBtn = document.querySelector('.result-btn');
 let changeBtn = document.querySelector('.change-btn');
@@ -13,7 +41,7 @@ resultBtn.addEventListener('click', saveData, false);
 btnBox.addEventListener('click', switchBtn, false);
 deleteAllBtn.addEventListener('click', deleteAllData, false);
 resultList.addEventListener('click', deleteData, false);
-activitySelect.addEventListener('change', calorieCal, false);
+// activitySelect.addEventListener('change', calorieCal, false);
 updateList(data);
 
 //
@@ -59,72 +87,62 @@ function saveData(e) {
         calories: '',
         activity: activity,
     }
-    console.log(resultData);
-    resultData.status = bmiStatus(resultData.bmi);
-    resultData.statusColor = statusColor(resultData.status);
+
+    let statusDetail = bmiStatus(resultData.bmi)
+    let listKey = `Status_${statusToListKey[statusDetail.status]}_Level_${optionToListKey[activity]}`
+
+    resultData.status = statusDetail.status;
+    resultData.statusColor = statusDetail.color;
     changeBtn.textContent = 'BMI ' + resultData.bmi;
     statusTag.textContent = resultData.status;
-    resultData.calories = calorieCal(resultData.status, resultData.activity);
+    resultData.calories = caloriesList[listKey] * weightValue;
+
     data.push(resultData);
     localStorage.setItem('listData', JSON.stringify(data));
     updateList(data);
-    //switchBtn(e);
-    // weightKg.value = ''; //清空欄位
-    // heightCm.value = ''; //清空欄位
 }
 
-//bmi狀態判斷
+// bmi狀態判斷, 顏色
 function bmiStatus(bmiValue) {
+    let statusDetail = {}
     if (bmiValue < 18.5) {
         statusTag.setAttribute('class', 'status blue-circle')
         changeBtn.setAttribute('class', 'button change-btn blue-circle')
-        return '過輕';
-        // return {
-        // status: '過輕',
-        // statusColor: 'green',
-        // }
+        statusDetail.status = '過輕';
+        statusDetail.color = 'blue';
     }
     if (bmiValue >= 18.5 && bmiValue < 24) {
         statusTag.setAttribute('class', 'status green-circle')
         changeBtn.setAttribute('class', 'button change-btn green-circle')
-        return '正常';
+        statusDetail.status = '正常';
+        statusDetail.color = 'green';
     }
     if (bmiValue >= 24 && bmiValue < 27) {
         statusTag.setAttribute('class', 'status yellow-circle')
         changeBtn.setAttribute('class', 'button change-btn yellow-circle')
-        return '過重';
+        statusDetail.status = '過重';
+        statusDetail.color = 'yellow';
     }
     if (bmiValue >= 27 && bmiValue < 30) {
         statusTag.setAttribute('class', 'status yellow-orange-circle')
         changeBtn.setAttribute('class', 'button change-btn yellow-orange-circle')
-        return '輕度肥胖';
+        statusDetail.status = '輕度肥胖';
+        statusDetail.color = 'yellow-orange';
     }
     if (bmiValue >= 30 && bmiValue < 35) {
         statusTag.setAttribute('class', 'status orange-circle')
         changeBtn.setAttribute('class', 'button change-btn orange-circle')
-        return '中度肥胖';
+        statusDetail.status = '中度肥胖';
+        statusDetail.color = 'orange';
     }
-    statusTag.setAttribute('class', 'status red-circle')
-    changeBtn.setAttribute('class', 'button change-btn red-circle')
-    return '重度肥胖';
-}
+    if (bmiValue >= 35) {
+        statusTag.setAttribute('class', 'status red-circle')
+        changeBtn.setAttribute('class', 'button change-btn red-circle')
+        statusDetail.status = '重度肥胖';
+        statusDetail.color = 'red';
+    }
 
-//bmi狀態警示顏色
-function statusColor(status) {
-    switch (status) {
-        case '過輕':
-            return 'blue';
-        case '正常':
-            return 'green';
-        case '過重':
-            return 'yellow';
-        case '輕度肥胖':
-            return 'yellow-orange';
-        case '中度肥胖':
-            return 'orange';
-        case '重度肥胖':
-            return 'red';
-    }
+    return statusDetail
 }
 
 //更新resultList
@@ -185,42 +203,49 @@ function switchBtn(e) {
     }
 }
 
+
+
 //熱量判斷及計算
-function calorieCal(status, activityLevel) {
-    let weightKg = document.querySelector('.weight-value').value;
-    if (status == '過輕') {
-        if (activityLevel == '輕度工作') {
-            return 35 * weightKg
-        }
-        if (activityLevel == '中度工作') {
-            return 40 * weightKg
-        }
-        if (activityLevel == '重度工作') {
-            return 45 * weightKg
-        }
-    }
-    if (status == '正常') {
-        if (activityLevel == '輕度工作') {
-            return 30 * weightKg
-        }
-        if (activityLevel == '中度工作') {
-            return 35 * weightKg
-        }
-        if (activityLevel == '重度工作') {
-            return 40 * weightKg
-        }
-    } else {
-        if (activityLevel == '輕度工作') {
-            return 25 * weightKg
-        }
-        if (activityLevel == '中度工作') {
-            return 30 * weightKg
-        }
-        if (activityLevel == '重度工作') {
-            return 35 * weightKg
-        }
-    }
-}
+// function calorieCal(status, activityLevel) {
+//     let weightKg = document.querySelector('.weight-value').value;
+//     let statusKey = statusToListKey[status] // 等於 statusToListKey.${status}
+//     let optionKey = optionToListKey[activityLevel]
+//     let listKey = `Status_${statusToListKey[status]}_Level_${optionToListKey[activityLevel]}`
+
+//     return caloriesList[`Status_${statusToListKey[status]}_Level_${optionToListKey[activityLevel]}`] * weightKg
+// if (status == '過輕') {
+//     if (activityLevel == '輕度工作') {
+//         return 35 * weightKg
+//     }
+//     if (activityLevel == '中度工作') {
+//         return 40 * weightKg
+//     }
+//     if (activityLevel == '重度工作') {
+//         return 45 * weightKg
+//     }
+// }
+// if (status == '正常') {
+//     if (activityLevel == '輕度工作') {
+//         return 30 * weightKg
+//     }
+//     if (activityLevel == '中度工作') {
+//         return 35 * weightKg
+//     }
+//     if (activityLevel == '重度工作') {
+//         return 40 * weightKg
+//     }
+// } else {
+//     if (activityLevel == '輕度工作') {
+//         return 25 * weightKg
+//     }
+//     if (activityLevel == '中度工作') {
+//         return 30 * weightKg
+//     }
+//     if (activityLevel == '重度工作') {
+//         return 35 * weightKg
+//     }
+// }
+// }
 
 //bmi狀態警示顏色
 //data.resultData.statusColor
