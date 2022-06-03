@@ -44,9 +44,8 @@ resultList.addEventListener('click', deleteData, false);
 // activitySelect.addEventListener('change', calorieCal, false);
 updateList(data);
 
-//
+//初始化
 function init() {
-    let data = JSON.parse(localStorage.getItem("listData")) || []
     for (let i = 0; i < data.length; i++) {
         showResult(
             data[i].status,
@@ -149,12 +148,12 @@ function bmiStatus(bmiValue) {
 function updateList(items) {
     let str = '';
     for (let i = 0; i < items.length; i++) {
-        str += `<li class="${items[i].statusColor}">
-            <span>${items[i].status}</span>
-            <span>身高 ${items[i].height}cm</span>
-            <span>體重 ${items[i].weight}Kg</span>
-            <span>BMI值 ${items[i].bmi}</span>
-            <span>建議熱量 ${items[i].calories} 大卡</span>
+        str += `<li class="${items[i].statusColor} col-6 h-25 mx-auto">
+            <span class="me-1">${items[i].status}</span>
+            <span class="me-1">身高 ${items[i].height}cm</span>
+            <span class="me-1">體重 ${items[i].weight}Kg</span>
+            <span class="me-1">BMI值 ${items[i].bmi}</span>
+            <span class="calories me-1">建議熱量  ${items[i].calories} 大卡</span>
             <span class="delete-btn" data-index="${i}">刪除</span>
         </li>`
 

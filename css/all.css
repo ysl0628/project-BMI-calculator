@@ -148,7 +148,10 @@ img {
 }
 
 .header {
-    margin-top: 30px;
+    padding-top: 30px;
+    padding-bottom: 50px;
+    background-color: #3f3f3f;
+    color: #789dca;
 }
 
 form {
@@ -165,10 +168,11 @@ input {
 }
 
 .result-btn {
-    width: 110px;
-    height: 110px;
-    color: black;
-    background-color: pink;
+    width: 100px;
+    height: 100px;
+    color: #1a5787;
+    font-size: larger;
+    background-color: #feab77;
     border: solid 0px;
     border-radius: 100%;
 }
@@ -186,9 +190,10 @@ input {
     position: absolute;
     font-size: 18px;
     border-radius: 6px;
-    padding: 1%;
     top: 35%;
     left: 150px;
+    background-color: beige;
+    text-align: center;
 }
 
 .col-2 {
@@ -209,11 +214,13 @@ input {
 
 .bmi-title {
     text-align: center;
-    margin-top: 50px;
+    margin-top: 30px;
+    margin-bottom: 20px;
 }
 
 .result-list {
-    margin-top: 20px;
+    margin-top: 30px;
+    width: 60%;
 }
 
 .result-list li {
@@ -229,73 +236,96 @@ input {
     border-radius: 5px;
 }
 
+span {
+    text-align: center;
+}
+
+.calories {
+    width: 16%;
+}
+
 .delete-btn {
     font-size: 15px;
+    width: 10%;
     padding: 2px;
+    text-align: center;
     cursor: pointer;
     border: 1px solid #8b8b8b;
-    background-color: aliceblue;
+    background-color: #323234;
     border-radius: 5px;
 }
 
 .delete-all {
-    color: beige;
+    color: #F3E5F5;
     width: 100px;
     border: 1px solid black;
-    background-color: rgb(255, 94, 0);
+    background-color: #4A148C;
     border-radius: 5px;
 }
 
 .green {
-    background-color: rgb(196, 228, 196);
+    background-color: #1B5E20;
+    color: #A5D6A7;
 }
 
 .blue {
-    background-color: lightskyblue;
+    background-color: #0D47A1;
+    color: #90CAF9;
 }
 
 .yellow {
-    background-color: lightyellow;
+    background-color: #F9A825;
+    color: #FFF59D;
 }
 
 .yellow-orange {
-    background-color: lightsalmon;
+    background-color: #FF6F00;
+    color: #FFE0B2;
 }
 
 .orange {
-    background-color: lightpink;
+    background-color: #E65100;
+    color: #FFAB91;
 }
 
 .red {
-    background-color: lightcoral;
-}
-
-.blue-circle {
-    border-color: lightskyblue;
-    color: darkblue;
+    background-color: #B71C1C;
+    color: #EF9A9A;
 }
 
 .green-circle {
-    border-color: rgb(196, 228, 196);
-    color: darkgreen;
+    border-color: #A5D6A7;
+    color: #1B5E20;
+}
+
+.blue-circle {
+    border-color: #90CAF9;
+    color: #0D47A1;
 }
 
 .yellow-circle {
-    border-color: darkgoldenrod;
-    color: darkgoldenrod;
+    border-color: #FFF59D;
+    color: #F9A825;
 }
 
 .yellow-orange-circle {
-    border-color: lightsalmon;
-    color: darksalmon;
+    border-color: #FFAB91;
+    color: #E65100;
 }
 
 .orange-circle {
-    border-color: lightpink;
-    color: darkorange;
+    border-color: #FFAB91;
+    color: #E65100;
 }
 
 .red-circle {
-    border-color: lightcoral;
-    color: darkred;
+    border-color: #EF9A9A;
+    color: #B71C1C;
+}
+
+.footer {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    color: #3f3f3f;
+    background-color: #789dca;
 }

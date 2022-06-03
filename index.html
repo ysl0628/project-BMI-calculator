@@ -13,14 +13,17 @@
 
 <body>
     <div class="header">
+        <div class="row mx-auto mb-4">
+            <h1 class="col-12 text-center">BMI Calculator</h1>
+        </div>
         <div class="row justify-content-center">
-            <div class="col-3">
+            <div class="col-6 col-sm-3 ">
                 <form>
-                    <label for="height-value">身高：</label>
-                    <input type="number" class="height-value form-control" placeholder="請輸入身高" required>
-                    <label for="weight-value">體重：</label>
-                    <input type="number" class="weight-value form-control" placeholder="請輸入體重" required>
-                    <label for="weight-value">活動量：</label>
+                    <label class="mb-1" for="height-value">身高：</label>
+                    <input type="number" class="height-value form-control mb-1" placeholder="請輸入身高" required>
+                    <label class="mb-1" for="weight-value">體重：</label>
+                    <input type="number" class="weight-value form-control mb-1" placeholder="請輸入體重" required>
+                    <label class="mb-1" for="weight-value">活動量：</label>
                     <select class="form-select activity-select">
                     <option selected>輕度工作</option>
                     <option >中度工作</option>
@@ -35,15 +38,16 @@
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="container mb-5">
         <h3 class="bmi-title">BMI紀錄</h3>
-        <ul class="result-list justify-content-center">
+        <ul class="result-list row row-cols-1 justify-content-center ps-0 w-75">
 
         </ul>
         <button class="delete-all">全部刪除</button>
     </div>
-    <div class="footer">
-
+    <div class="footer mt-5">
+        <p class="mb-0 text-center">BMI 計算機</p>
+        <p class="mb-0 text-center">Copyright © 2022 YSL0628</p>
     </div>
 
     <script src="js/all.js"></script>
