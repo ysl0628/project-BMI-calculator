@@ -251,6 +251,7 @@ span {
     text-align: center;
     cursor: pointer;
     border: 1px solid #8b8b8b;
+    color: #ECEFF1;
     background-color: #323234;
     border-radius: 5px;
 }

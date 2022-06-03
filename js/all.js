@@ -154,7 +154,7 @@ function updateList(items) {
             <span class="me-1">體重 ${items[i].weight}Kg</span>
             <span class="me-1">BMI值 ${items[i].bmi}</span>
             <span class="calories me-1">建議熱量  ${items[i].calories} 大卡</span>
-            <span class="delete-btn" data-index="${i}">刪除</span>
+            <button class="delete-btn" data-index="${i}">刪除</button>
         </li>`
 
     }
@@ -165,7 +165,7 @@ function updateList(items) {
 function deleteData(e) {
     e.preventDefault();
     let index = e.target.dataset.index;
-    if (e.target.nodeName !== 'SPAN') { return };
+    if (e.target.nodeName !== 'BUTTON') { return };
     console.log(e);
     data.splice(index, 1);
     localStorage.setItem('listData', JSON.stringify(data));
