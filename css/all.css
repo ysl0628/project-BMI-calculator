@@ -179,12 +179,20 @@ input {
     border-radius: 100%;
 }
 
+.result-btn:hover {
+    border: solid 5px #789dca;
+}
+
 .change-btn {
     font-size: 22px;
     width: 110px;
     height: 110px;
     border: solid 10px;
     border-radius: 100%;
+}
+
+.change-btn:hover {
+    background-color: beige;
 }
 
 .status {
