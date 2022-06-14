@@ -72,8 +72,7 @@ function saveData(e) {
     let activitySelect = document.querySelector('.activity-select');
     const weightValue = weightKg.value;
     const heightValue = heightCm.value / "100";
-    const activity = activitySelect.value
-    console.log(heightValue);
+    const activity = activitySelect.value;
     const bmi = weightValue / (heightValue * heightValue);
     const bmiValue = bmi.toFixed(2);
     console.log(bmiValue);
@@ -145,19 +144,19 @@ function bmiStatus(bmiValue) {
 }
 
 //更新resultList
-function updateList(items) {
+function updateList(data) {
     let str = '';
-    for (let i = 0; i < items.length; i++) {
-        str += `<li class="${items[i].statusColor} col-6 h-25 mx-auto">
-            <span class="me-1">${items[i].status}</span>
-            <span class="me-1">身高 ${items[i].height}cm</span>
-            <span class="me-1">體重 ${items[i].weight}Kg</span>
-            <span class="me-1">BMI值 ${items[i].bmi}</span>
-            <span class="calories me-1">建議熱量  ${items[i].calories} 大卡</span>
-            <button class="delete-btn" data-index="${i}">刪除</button>
+    data.forEach((item, index) => {
+        str += `<li class="${item.statusColor} col-6 h-25 mx-auto">
+            <span class="me-1">${item.status}</span>
+            <span class="me-1">身高 ${item.height}cm</span>
+            <span class="me-1">體重 ${item.weight}Kg</span>
+            <span class="me-1">BMI值 ${item.bmi}</span>
+            <span class="calories me-1">建議熱量  ${item.calories} 大卡</span>
+            <button class="delete-btn" data-index="${index}">刪除</button>
         </li>`
 
-    }
+    })
     resultList.innerHTML = str;
 }
 
